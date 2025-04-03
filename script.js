@@ -1,5 +1,5 @@
 document.getElementById("paymentForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent page reload
+    event.preventDefault();
 
     let data = {
         name: document.getElementById("name").value,
@@ -7,9 +7,9 @@ document.getElementById("paymentForm").addEventListener("submit", function(event
         amount: document.getElementById("amount").value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbz2bWvhnCERTaSjIxebKyu4GPP3Ga0dq4En8deACu2kX4AHQUIRyVyn5WniqUS519kemg/exec", {  
+    fetch("https://script.google.com/macros/s/AKfycbzp-TvyoAkt3ZOAD6RZkp9vfNDxpGbj-NKJ21OpTCvKKCuB773N6FNcZ2dzlxOVWETpAw/exec", {  
         method: "POST",
-        mode: "cors", // Allow CORS
+        mode: "cors",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }
     })
