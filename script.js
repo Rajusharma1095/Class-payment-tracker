@@ -1,25 +1,54 @@
-document.getElementById("paymentForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    let data = {
-        name: document.getElementById("name").value,
-        class: document.getElementById("class").value,
-        amount: document.getElementById("amount").value
-    };
-
-    fetch("https://script.google.com/macros/s/AKfycbzp-TvyoAkt3ZOAD6RZkp9vfNDxpGbj-NKJ21OpTCvKKCuB773N6FNcZ2dzlxOVWETpAw/exec", {  
-        method: "POST",
-        mode: "cors",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Server Response:", data);
-        alert("Payment Recorded Successfully!");
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Something went wrong! Check Console.");
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('paymentForm');
+    const statusMessage = document.getElementById('statusMessage');
+    
+    // Replace this URL with your actual Google Apps Script Web App URL
+    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+    
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        submitForm();
     });
+    
+    function submitForm() {
+        // Collect form data
+        const formData = {
+            studentName: document.getElementById('studentName').value,
+            studentId: document.getElementById('studentId').value,
+            className: document.getElementById('className').value,
+            paymentAmount: document.getElementById('paymentAmount').value,
+            paymentDate: document.getElementById('paymentDate').value,
+            paymentMethod: document.getElementById('paymentMethod').value,
+            notes: document.getElementById('notes').value
+        };
+        
+        // Display loading state
+        statusMessage.innerHTML = 'Submitting payment information...';
+        statusMessage.className = '';
+        statusMessage.classList.add('info');
+        statusMessage.classList.remove('hidden');
+        
+        // Send data to Google Apps Script
+        fetch(scriptURL, {
+            method: 'POST',
+            body: JSON.stringify(formData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            statusMessage.innerHTML = 'Payment information submitted successfully!';
+            statusMessage.className = '';
+            statusMessage.classList.add('success');
+            form.reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            statusMessage.innerHTML = 'There was an error submitting your payment. Please try again.';
+            statusMessage.className = '';
+            statusMessage.classList.add('error');
+        });
+    }
 });
