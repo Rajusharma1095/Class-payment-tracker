@@ -7,8 +7,9 @@ document.getElementById("paymentForm").addEventListener("submit", function(event
         amount: document.getElementById("amount").value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbzg8d_ljSi58IkOlYPZfM2ueu47Ba29kcb5r-w2u_wCcHhyRU6nCeuEfBbkWDRBC3de-Q/exec", {  
+    fetch("https://script.google.com/macros/s/AKfycbz2bWvhnCERTaSjIxebKyu4GPP3Ga0dq4En8deACu2kX4AHQUIRyVyn5WniqUS519kemg/exec", {  
         method: "POST",
+        mode: "cors", // Allow CORS
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" }
     })
