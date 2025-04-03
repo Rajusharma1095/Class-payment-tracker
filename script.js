@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const statusMessage = document.getElementById('statusMessage');
     
     // Replace this URL with your actual Google Apps Script Web App URL
-    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyjE_CcJGErETq8uK7TNQHw_aIKpPuhEiAu9h0vlRdHeVlYjT5JatRA9idj4vqp3Ae0lA/exec';
     
     form.addEventListener('submit', e => {
         e.preventDefault();
